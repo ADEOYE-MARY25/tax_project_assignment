@@ -7,13 +7,13 @@
 [![Chroma](https://img.shields.io/badge/Chroma-Vector_DB-4B8BFE.svg?style=flat)](https://www.trychroma.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-An **agentic Retrieval-Augmented Generation (RAG)** system specialized in answering questions about Nigerian tax laws and reforms, powered by **LangGraph** for stateful workflows and **LangChain** for tool orchestration.
+An **agentic Retrieval-Augmented Generation (RAG)** system specialized in answering questions about Nigerian tax laws and reforms, powered by **LangGraph** for stateful workflows and **LangChain** for tool orchestration was used.
 
 This agent retrieves authoritative information from a curated knowledge base of tax documents (Acts, Bills, analyses) stored in a **Chroma** vector database and provides accurate, concise responses. It features **smart multilingual output** – automatically detecting requests for translations (e.g., Yoruba, Pidgin, Hausa, Igbo) and delivering responses in English + the requested language(s).
 
 Ideal for tax consultants, legal researchers, policymakers, or anyone needing reliable insights into Nigeria's evolving tax landscape.
 
-## ✨ Key Features
+##  Key Features
 
 - **Authoritative Retrieval**: Multiple specialized retrieval tools prioritizing legal hierarchy (Acts > Bills > Guidance > Analyses)
 - **Agentic Workflow**: Built with LangGraph for conditional routing, tool selection, and robust error handling
@@ -22,7 +22,7 @@ Ideal for tax consultants, legal researchers, policymakers, or anyone needing re
 - **Citation Support**: Responses include source metadata (file path, page, document type)
 - **Extensible Design**: Easy to add new retrieval strategies or tools
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 - **Python** 3.10+
 - **LangChain** & **LangGraph** – Core orchestration and agent framework
@@ -30,12 +30,12 @@ Ideal for tax consultants, legal researchers, policymakers, or anyone needing re
 - **Chroma** – Local persistent vector store with OpenAI embeddings
 - **dotenv** – Environment variable management
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/nigeria-tax-rag-agent.git
+git clone https://github.com/ADEOYE-MARY25/tax_project_assignment
 cd nigeria-tax-rag-agent
 ```
 
