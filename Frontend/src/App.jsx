@@ -408,95 +408,94 @@ function App() {
   };
 
   const onSend = async () => {
-    if (!inputMessage.trim()) return;
+  if (!inputMessage.trim()) return;
 
-    let conversationId = activeConversationId || "default";
+  let conversationId = activeConversationId || "default";
 
-    // Create new conversation if none exists
-    if (!activeConversationId) {
-      onNewChat();
-      conversationId = conversations[0]?.id || "default";
+  if (!activeConversationId) {
+    onNewChat();
+    conversationId = conversations[0]?.id || "default";
+  }
+
+  const userMessage = {
+    id: Date.now(),
+    type: "user",
+    text: inputMessage,
+  };
+
+  setConversations(prev =>
+    prev.map(c =>
+      c.id === conversationId
+        ? {
+            ...c,
+            title: c.messages.length === 0
+              ? inputMessage.slice(0, 40) + (inputMessage.length > 40 ? "..." : "")
+              : c.title,
+            messages: [...c.messages, userMessage],
+          }
+        : c
+    )
+  );
+
+  setInputMessage("");
+  setIsLoading(true);
+
+  try {
+    const result = await api.post("/query", {
+      question: inputMessage,
+      thread_id: conversationId,
+    });
+
+    // Extract assistant message and citations correctly
+    let assistantText = "No response received.";
+    let citations = [];
+
+    if (result.messages && Array.isArray(result.messages)) {
+      const assistantMsg = result.messages.find(m => m.role === "assistant");
+      if (assistantMsg) {
+        assistantText = assistantMsg.content || "";
+        citations = assistantMsg.metadata?.citations || [];
+      }
     }
 
-    const userMessage = {
-      id: Date.now(),
-      type: "user",
-      text: inputMessage,
+    const aiMessage = {
+      id: Date.now() + 1,
+      type: "ai",
+      text: assistantText,
+      metadata: {
+        citations: citations  // ← Preserves exact backend structure
+      },
+      time: "1.0",
     };
 
-    // Show user message immediately
     setConversations(prev =>
       prev.map(c =>
         c.id === conversationId
-          ? {
-              ...c,
-              title: c.messages.length === 0
-                ? inputMessage.slice(0, 40) + (inputMessage.length > 40 ? "..." : "")
-                : c.title,
-              messages: [...c.messages, userMessage],
-            }
+          ? { ...c, messages: [...c.messages, aiMessage] }
           : c
       )
     );
 
-    setInputMessage("");
-    setIsLoading(true);
+  } catch (err) {
+    console.error("Query failed:", err);
+    const errorMessage = {
+      id: Date.now() + 1,
+      type: "ai",
+      text: "Sorry, something went wrong. Please try again.",
+      time: "0.0",
+    };
 
-    try {
-      // CALL THE CORRECT ENDPOINT: /query
-      const result = await api.post("/query", {
-        question: inputMessage,
-        thread_id: conversationId,
-      });
-
-      // Extract assistant message from your backend response
-      let assistantText = "No response received.";
-      let generationTime = "1.0";
-
-      if (result.messages && Array.isArray(result.messages)) {
-        for (const msg of result.messages) {
-          if (msg.role === "assistant") {
-            assistantText = msg.content;
-            break;
-          }
-        }
-      }
-
-      const aiMessage = {
-        id: Date.now() + 1,
-        type: "ai",
-        text: assistantText,
-        time: generationTime,
-      };
-
-      setConversations(prev =>
-        prev.map(c =>
-          c.id === conversationId
-            ? { ...c, messages: [...c.messages, aiMessage] }
-            : c
-        )
-      );
-
-    } catch (err) {
-      console.error("Query failed:", err);
-      const errorMessage = {
-        id: Date.now() + 1,
-        type: "ai",
-        text: "Sorry, something went wrong. Please try again.",
-        time: "0.0",
-      };
-
-      setConversations(prev =>
-        prev.map(c =>
-          c.id === conversationId
-            ? { ...c, messages: [...c.messages, errorMessage] }
-            : c
-        )
-      );
-    } finally {
-      setIsLoading(false);
-    }
-  };
+    setConversations(prev =>
+      prev.map(c =>
+        c.id === conversationId
+          ? { ...c, messages: [...c.messages, errorMessage] }
+          : c
+      )
+    );
+  } finally {
+    setIsLoading(false);
+  }
+};
 
   const onCopyMessage = (text, id) => {
     navigator.clipboard.writeText(text);
