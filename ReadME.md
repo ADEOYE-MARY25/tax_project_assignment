@@ -1,99 +1,245 @@
-# Nigeria Tax RAG Agent
+# TaxQA NG – Intelligent Nigerian Tax Assistant 
+## User Interface
+### Desktop View
+- [Landing Page] <img width="1597" height="768" alt="Image" src="https://github.com/user-attachments/assets/2f467b28-dc57-4727-82c2-d481049b2269" />
+- [Dark mode] <img width="1598" height="764" alt="Image" src="https://github.com/user-attachments/assets/324d0b43-ff3f-4e7f-88dc-cc1a99560d92" />
+- [Chat Page] <img width="1600" height="768" alt="Image" src="https://github.com/user-attachments/assets/26970f8f-3635-40a5-a33d-4a390c2fad7e" />
+- [Login Page] <img width="1593" height="763" alt="Image" src="https://github.com/user-attachments/assets/6b55f6e6-c8e0-482c-b133-86cef3638e9b" />
+- [signup Page] <img width="1595" height="765" alt="Image" src="https://github.com/user-attachments/assets/587b7f1a-82d4-485e-9687-f87712e3ec39" />
+- [Authenticated Page] <img width="1595" height="757" alt="Image" src="https://github.com/user-attachments/assets/ad40e74f-476e-45fa-b5d2-7628ba39ea58" />
 
-[![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/downloads/)
-[![LangChain](https://img.shields.io/badge/LangChain-0.2+-1C3C3C.svg?style=flat&logo=langchain&logoColor=white)](https://www.langchain.com/)
-[![LangGraph](https://img.shields.io/badge/LangGraph-Latest-1C3C3C.svg?style=flat&logo=langchain&logoColor=white)](https://langchain-ai.github.io/langgraph/)
-[![OpenAI](https://img.shields.io/badge/OpenAI-gpt--4o--mini-000000.svg?style=flat&logo=openai)](https://platform.openai.com/)
-[![Chroma](https://img.shields.io/badge/Chroma-Vector_DB-4B8BFE.svg?style=flat)](https://www.trychroma.com/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+### Mobile View
+- [Landing Page] <img width="419" height="675" alt="Image" src="https://github.com/user-attachments/assets/06f64766-4950-4c08-9e5a-26982ad0caba" />
+- [Navbar ] <img width="393" height="692" alt="Image" src="https://github.com/user-attachments/assets/db831f92-5c4e-4166-abcc-8b3d96d2d5ae" />
+- [Login Page] <img width="375" height="680" alt="Image" src="https://github.com/user-attachments/assets/b7cfadf9-8501-4fb0-be6a-6438ca68a82f" />
+- [Signup Page] <img width="378" height="677" alt="Image" src="https://github.com/user-attachments/assets/5d05e0c4-6aa9-418a-bbe2-0dcf32e73262" />
 
-An **agentic Retrieval-Augmented Generation (RAG)** system specialized in answering questions about Nigerian tax laws and reforms, powered by **LangGraph** for stateful workflows and **LangChain** for tool orchestration.
+The National Assembly just passed 4 tax reform bills that will completely change how Nigeria collects taxes starting January 2026.
 
-This agent retrieves authoritative information from a curated knowledge base of tax documents (Acts, Bills, analyses) stored in a **Chroma** vector database and provides accurate, concise responses. It features **smart multilingual output** – automatically detecting requests for translations (e.g., Yoruba, Pidgin, Hausa, Igbo) and delivering responses in English + the requested language(s).
+**On Twitter, people are panicking:**
+- I heard I'll pay 50% tax now!
+- This will destroy the North!
+- Small businesses will collapse!
 
-Ideal for tax consultants, legal researchers, policymakers, or anyone needing reliable insights into Nigeria's evolving tax landscape.
+But when you read the actual bills? Most of the panic is based on misinformation.
 
-## ✨ Key Features
+**Aunty Ngozi** runs a small restaurant in Lagos. She heard about the tax reforms on the radio and is terrified she'll pay more tax. But she doesn't know where to find the actual bills or how to understand them.
 
-- **Authoritative Retrieval**: Multiple specialized retrieval tools prioritizing legal hierarchy (Acts > Bills > Guidance > Analyses)
-- **Agentic Workflow**: Built with LangGraph for conditional routing, tool selection, and robust error handling
-- **Multilingual Support**: Intelligent detection and translation into Nigerian languages (Yoruba, Pidgin, Hausa, Igbo) while preserving legal accuracy
-- **Session Memory**: Conversation history preserved per thread/session
-- **Citation Support**: Responses include source metadata (file path, page, document type)
-- **Extensible Design**: Easy to add new retrieval strategies or tools
+**Chidi** is a software developer. He wants to know if his income tax will increase or decrease, but the 200-page bill is too dense to read.
 
-## 🛠️ Tech Stack
+**Governor Yahaya** is worried about how VAT derivation will affect his state's revenue, but he's getting conflicting information from advisors.
 
-- **Python** 3.10+
-- **LangChain** & **LangGraph** – Core orchestration and agent framework
-- **OpenAI** (gpt-4o-mini) – LLM for reasoning and multilingual summarization
-- **Chroma** – Local persistent vector store with OpenAI embeddings
-- **dotenv** – Environment variable management
+This TaxQA NG is a modern, responsive, AI-powered web application designed to help users understand and navigate **Nigerian tax policies** through natural language conversations.  
+It delivers a ChatGPT-style experience with authentication, conversation management, theme toggling, and real-time AI responses.
 
-## 🚀 Quick Start
+This repository contains the **frontend implementation**, built with **React and Tailwind CSS**, and designed to integrate seamlessly with a FastAPI backend.
 
-### Clone the Repository
 
+
+##  Core Features
+
+###  AI-Powered Tax Conversations
+- Ask natural language questions about Nigerian tax policies
+- AI responses generated in real time
+- Response generation time displayed per message
+
+###  Chat Experience
+- Clear separation of user and AI messages
+- Edit and regenerate previous user questions
+- Copy AI responses to clipboard
+- Loading animation during AI response generation
+
+###  Authentication
+- User signup and login
+- JWT-based authentication
+- Token persistence via `localStorage`
+- Auth-aware UI and protected flows
+
+### Theme System
+- Light and Dark mode toggle
+- Global theme state
+- Fully Tailwind-based styling
+
+### Responsive Design
+- Optimized for mobile, tablet, and desktop
+- Sidebar converts to slide-in menu on mobile
+- Responsive input bars and layout
+
+### Conversation Utilities
+- New chat initiation
+- Recent searches (state-ready for persistence)
+- Smooth navigation without page reloads
+
+
+
+##  Tech Stack
+
+| Layer | Technology |
+|-----|-----------|
+| Frontend | React (Functional Components) |
+| Styling | Tailwind CSS |
+| Icons | lucide-react |
+| State Management | React Hooks |
+| Routing | Internal state routing |
+| API Communication | Fetch wrapper |
+| Authentication | JWT |
+| Backend  | FastAPI |
+
+
+
+## Project Structure
+
+src/
+├── components/
+│ ├── AIMessage.jsx
+│ ├── UserMessage.jsx
+│ ├── ChatPage.jsx
+│ ├── LandingPage.jsx
+│ ├── InputBar.jsx
+│ ├── LoadingAnimation.jsx
+│ ├── Header.jsx
+│ ├── Navbar.jsx
+│ ├── LoginPage.jsx
+│ ├── SignupPage.jsx
+│
+├── utils/
+│ ├── api.js
+│ ├── validation.js
+│
+├── assets/
+│ └── logo.png
+│
+├── App.jsx
+└── main.jsx
+
+
+
+
+
+##  Component Overview
+
+### App.jsx
+- Root component and global state manager
+- Handles authentication, theming, messages, and navigation
+- Coordinates API calls and chat lifecycle
+
+### ChatPage
+- Renders the full chat interface
+- Displays user messages, AI responses, and loading states
+- Integrates editing, regeneration, and copy actions
+
+### AIMessage
+- Displays AI responses
+- Copy-to-clipboard support
+- Response generation time indicator
+
+### UserMessage
+- Displays user messages
+- Inline editing
+- Regenerate AI response from edited input
+
+### InputBar
+- Shared input component for landing and chat pages
+- Responsive layout
+- Supports “Enter to send”
+
+### LandingPage
+- Initial user experience
+- Encourages first interaction
+- Transitions automatically to chat view
+
+### Navbar
+- Desktop sidebar and mobile slide-in menu
+- New chat, recent searches, logout, and theme toggle
+
+### Header
+- App branding and logo
+- Auth-aware actions (Login / Signup or User avatar)
+
+
+
+##  API Integration
+
+All API communication is centralized via a fetch utility.
+
+### Base URL
 ```bash
-git clone https://github.com/yourusername/nigeria-tax-rag-agent.git
-cd nigeria-tax-rag-agent
+http://127.0.0.1:8000
 ```
 
-##  Set Up a Virtual Environment
+
+
+### Endpoints Used
+
+| Endpoint | Method | Purpose |
+|--------|--------|--------|
+| `/register` | POST | User registration |
+| `/login` | POST | User authentication |
+| `/me` | GET | Fetch authenticated user |
+| `/query` | POST | Generate AI response |
+| `/session` | GET | 
+| `/reset` | POST |
+| `/debug/retrieval` | GET |
+
+### Authentication
+- JWT stored in `localStorage`
+- Automatically attached to requests using:
+- Authorization: Bearer <token>
+  
+
+## Validation & Security
+
+### Email Validation
+- Standard regex-based validation
+
+### Password Requirements
+- Minimum 8 characters
+- At least:
+- One uppercase letter
+- One lowercase letter
+- One number
+
+### Password Strength Indicator
+- Visual meter ranging from Weak to Strong
+
+
+##  Theming System
+
+- Global `isDarkMode` state
+- Tailwind conditional class rendering
+- Consistent appearance across all pages
+
+
+
+##  Getting Started
+
+### 1. Clone the Repository
 ```bash
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+git clone https://github.com/ADEOYE-MARY25/tax_project_assignment.git
+cd tax-policy
+```
+### 2. Install Dwpendencies
+```bash
+npm install react-router-dom
+npm install lucide-react
+npm install tailwindcss @tailwindcss/vite
 ```
 
-##  Install Dependencies
+### 3. Run Development Server
+```bash
+npm run dev
+```
 
-pip install -r requirements.txt
-
-Note: A sample requirements.txt should include:
-
-langchain
-langgraph
-langchain-openai
-langchain-chroma
-chromadb
-python-dotenv
-PyJWT
-bcrypt
-fastapi
-
-## Configure Environment Variables
-
-OPENAI_API_KEY=your_openai_api_key_here
-
-## Prepare the Knowledge Base
-This is where the vector database should be pre-populated with Nigerian tax documents (PDFs in a structured folder, e.g., nigeria_tax_rag/data/raw_pdfs/)., run it once:
-
-python build_index.py 
-
-The agent expects a Chroma collection at ./chroma_db (configurable in code).
-
- ## Architecture Overview
-
-Retrieval Tools: General, authority-prioritized, recent documents, definitions
-Agent Node: LLM decides when/if to use tools based on strict guidelines
-Multilingual Node: Final post-processing step that invokes a dedicated tool for language-aware summarization
-Graph Flow: START → assistant → (tools)* → multilingual → END
-
-## Contributing
-Contributions are welcome! Feel free to:Add new retrieval strategies
-Improve multilingual prompts
-Enhance document ingestion
-Submit bug fixes or feature requests
-
-Please open an issue first for major changes.
-
-## License
-This project is licensed under the MIT License – see LICENSE for details.
-
-Built with love for accessible, accurate tax information in Nigeria.
-Questions? Open an issue or reach out!
+4. Backend Requirement
+Ensure the FastAPI backend is running at:
+```bash
+http://127.0.0.1:8000
+```
 
 
 
-
-
+## Developers and Engineers
+1. Bankole Babafemi Usman (developer) ([Github](https://github.com/babafemibank))
+2. Adeoye Mary Funmilayo (Engineer) ([Github](https://github.com/ADEOYE-MARY25))
+3. Okemakinde Sherif S. (Engineer) ([Github](https://github.com/cheryvmak))
+4. 
