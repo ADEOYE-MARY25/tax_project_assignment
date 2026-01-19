@@ -45,7 +45,7 @@ function App() {
 
   const onNewChat = () => {
     const newConv = {
-      id: crypto.randomUUID(),
+      id: Date.now().toString(),
       title: "New chat",
       messages: [],
       updatedAt: new Date(),

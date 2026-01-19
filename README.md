@@ -231,7 +231,7 @@ npm run dev
 ```
 
 4. Backend Requirement
-Ensure the FastAPI backend is running at:
+Ensure the FastAPI backend is running at:9o
 ```bash
 http://127.0.0.1:8000
 ```
